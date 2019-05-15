@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import React, { Component, Fragment } from 'react';
+import ReactMapGL, { Marker, FullscreenControl } from 'react-map-gl';
+
+import GlobalStyle from './styles/global';
+
+import SideBar from './components/sidebar';
 
 class App extends Component {
   state = {
@@ -39,25 +43,41 @@ class App extends Component {
 
   render() {
     return (
-      <ReactMapGL
-        {...this.state.viewport}
-        onClick={this.handleMapClick}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOXACCESSTOKEN}
-        mapStyle="mapbox://styles/mapbox/basic-v9"
-        onViewportChange={viewport => this.setState({ viewport })}
-      >
-        <Marker latitude={-1.456562} longitude={-48.4780078} captureClick>
-          <img
-            style={{
-              borderRadius: 100,
-              width: 48,
-              height: 48,
-            }}
-            alt="desenv"
-            src="https://avatars1.githubusercontent.com/u/3511128?v=4"
-          />
-        </Marker>
-      </ReactMapGL>
+      <Fragment>
+        <GlobalStyle />
+        <ReactMapGL
+          {...this.state.viewport}
+          onClick={this.handleMapClick}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOXACCESSTOKEN}
+          mapStyle="mapbox://styles/mapbox/basic-v9"
+          onViewportChange={viewport => this.setState({ viewport })}
+        >
+          <SideBar />
+          <Marker latitude={-1.456562} longitude={-48.4780078} captureClick>
+            <img
+              style={{
+                borderRadius: 100,
+                width: 48,
+                height: 48,
+              }}
+              alt="desenv"
+              src="https://avatars1.githubusercontent.com/u/3511128?v=4"
+            />
+          </Marker>
+
+          <Marker latitude={-1.4582129} longitude={-48.48208137} captureClick>
+            <img
+              style={{
+                borderRadius: 100,
+                width: 48,
+                height: 48,
+              }}
+              alt="desenv"
+              src="https://avatars1.githubusercontent.com/u/7287437?v=4"
+            />
+          </Marker>
+        </ReactMapGL>
+      </Fragment>
     );
   }
 }
